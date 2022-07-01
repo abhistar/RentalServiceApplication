@@ -1,0 +1,17 @@
+package model;
+
+import lombok.Builder;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+@Builder
+public class Vehicle {
+    private int id;         // unique identifier of vehicle
+    private VehicleType type;    // type of vehicle like car, bike, auto etc.
+    private double bookingPrice; //fixed rent of vehicle
+    private List<TimeSlot> bookingSchedule;
+    private int capacity; // seating capacity of vehicle
+
+}
