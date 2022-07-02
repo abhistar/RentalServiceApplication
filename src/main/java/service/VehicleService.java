@@ -38,10 +38,12 @@ public class VehicleService {
         return vehicleRepository.saveVehicle(vehicle);
     }
 
+    //TODO Add logic to this function
     public static Boolean isVehicleAvailable(Vehicle vehicle) {
         return true;
     }
 
+    //TODO Add logic to this function
     public static Double bookVehicle(Vehicle vehicle, int startTime, int endTime) {
         return vehicle.getBookingPrice();
     }
