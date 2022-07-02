@@ -1,4 +1,3 @@
-import model.Vehicle;
 import model.VehicleType;
 import service.BranchService;
 import service.VehicleService;
@@ -7,13 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RentalServiceExecutor {
-    private final VehicleService vehicleService;
-    private final BranchService branchService;
-
-    public RentalServiceExecutor() {
-        vehicleService = new VehicleService();
-        branchService = new BranchService();
-    }
+    private static final VehicleService vehicleService = new VehicleService();
+    private static final BranchService branchService = new BranchService();
 
     public Object execute(String command) {
         String[] arguments = command.split(" ");

@@ -13,7 +13,7 @@ public class VehicleRepository {
         return true;
     }
 
-    public static Vehicle getVehicleById(String vehicleId){
+    public Vehicle getVehicleById(String vehicleId){
         return vehicleMap.get(vehicleId);
     }
 }

@@ -4,8 +4,7 @@ public enum VehicleType {
     CAR,
     BIKE,
     AUTO,
-    VAN,
-    UNDEFINED;
+    VAN;
 
     public static VehicleType getVehicleType(String vehicle) {
         for(VehicleType vehicleType: VehicleType.values()) {
@@ -13,6 +12,6 @@ public enum VehicleType {
                 return vehicleType;
             }
         }
-        return UNDEFINED;
+        return null;
     }
 }

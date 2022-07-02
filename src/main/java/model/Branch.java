@@ -11,5 +11,5 @@ import java.util.PriorityQueue;
 @Builder
 public class Branch {
     String name; //unique branch name
-    HashMap<VehicleType, PriorityQueue<Vehicle>> vehicleCatalog; //TODO add custom comparator for price based strategy
+    HashMap<VehicleType, PriorityQueue<Vehicle>> vehicleCatalog;
 }
