@@ -33,12 +33,26 @@ public class BranchService {
         Branch branch = BranchRepository.getBranchByName(branchName);
 
         for (Vehicle vehicle : branch.getVehicleCatalog().get(vehicleType)) {
-            if (VehicleService.isVehicleAvailable(vehicle)) {
+            if (VehicleService.isVehicleAvailable(vehicle, startTime, endTime)) {
                 return VehicleService.bookVehicle(vehicle, startTime, endTime);
             }
         }
 
         return -1.0;
+    }
+
+    public String displayVehicle(String branchName, int startTime, int endTime) {
+        Branch branch = BranchRepository.getBranchByName(branchName);
+        List<String> availableVehicles = new ArrayList<>();
+
+        for (VehicleType vehicleType: branch.getVehicleCatalog().keySet()) {
+            for (Vehicle vehicle: branch.getVehicleCatalog().get(vehicleType)) {
+                if (VehicleService.isVehicleAvailable(vehicle, startTime, endTime)) {
+                    availableVehicles.add(vehicle.getId());
+                }
+            }
+        }
+        return String.join(", ", availableVehicles);
     }
 
     //TODO: delete branch functionality
