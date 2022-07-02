@@ -9,12 +9,12 @@ public class RentalServiceExecutor {
     private static final VehicleService vehicleService = new VehicleService();
     private static final BranchService branchService = new BranchService();
 
-    public Object execute(String command) {
-        String[] arguments = command.split(" ");
+    public Object execute(String input) {
+        String[] arguments = input.split(" ");
 
-        String methodString = arguments[0];
+        String command = arguments[0];
 
-        switch (methodString) {
+        switch (command) {
             case "ADD_BRANCH":
                 return branchService.addBranch(arguments[1], getVehicleList(arguments[2]));
             case "ADD_VEHICLE":
@@ -24,7 +24,7 @@ public class RentalServiceExecutor {
                 return branchService.bookVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
                     Integer.parseInt(arguments[3]), Integer.parseInt(arguments[4]));
             case "DISPLAY_VEHICLES":
-                return branchService.displayVehicle(arguments[1], Integer.parseInt(arguments[3]), Integer.parseInt(arguments[4]));
+                return branchService.displayVehicle(arguments[1], Integer.parseInt(arguments[2]), Integer.parseInt(arguments[3]));
             default:
                 return "Command Unknown";
         }

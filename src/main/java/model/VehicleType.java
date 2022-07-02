@@ -4,7 +4,8 @@ public enum VehicleType {
     CAR(4),
     BIKE(2),
     AUTO(3),
-    VAN(6);
+    VAN(6),
+    BUS(25);
 
     private final int capacity;
 
