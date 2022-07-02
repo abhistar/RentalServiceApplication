@@ -22,7 +22,7 @@ public class VehicleService {
                 .id(vehicleId)
                 .type(vehicleType)
                 .bookingPrice(price)
-                .capacity(4) //TODO add vehicle capacity
+                .capacity(vehicleType.getCapacity())
                 .bookingSchedule(new LinkedList<>())
                 .build();
 
