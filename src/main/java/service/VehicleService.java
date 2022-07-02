@@ -19,7 +19,7 @@ public class VehicleService {
         vehicleRepository = new VehicleRepository();
     }
 
-    public boolean addVehicle(String branchName, VehicleType vehicleType, int vehicleId, double price) {
+    public Boolean addVehicle(String branchName, VehicleType vehicleType, String vehicleId, double price) {
         Vehicle vehicle = Vehicle.builder()
                 .id(vehicleId)
                 .type(vehicleType)

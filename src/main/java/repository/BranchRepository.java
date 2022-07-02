@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BranchRepository {
-    private static Map<String, Branch> branchMap = new HashMap<>();
+    private static final Map<String, Branch> branchMap = new HashMap<>();
 
     public static boolean saveBranch(Branch branch){
         if(branchMap.containsKey(branch.getName()))

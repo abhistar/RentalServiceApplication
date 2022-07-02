@@ -17,7 +17,7 @@ public class BranchService {
         branchRepository = new BranchRepository();
     }
 
-    public boolean addBranch(String branchName, List<VehicleType> vehicleTypeList) {
+    public Boolean addBranch(String branchName, List<VehicleType> vehicleTypeList) {
         HashMap<VehicleType, List<Vehicle>> vehicleCatalog = new HashMap<>();
 
         vehicleTypeList.forEach(vehicleType -> {
