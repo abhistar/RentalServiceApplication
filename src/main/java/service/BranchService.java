@@ -30,7 +30,7 @@ public class BranchService {
     }
 
     public Double bookVehicle(String branchName, VehicleType vehicleType, int startTime, int endTime) {
-        Branch branch = branchRepository.getBranchByName(branchName);
+        Branch branch = BranchRepository.getBranchByName(branchName);
 
         for (Vehicle vehicle : branch.getVehicleCatalog().get(vehicleType)) {
             if (VehicleService.isVehicleAvailable(vehicle)) {
