@@ -24,7 +24,11 @@ public class RentalServiceExecutor {
             case "ADD_BRANCH":
                 return branchService.addBranch(arguments[1], getVehicleList(arguments[2]));
             case "ADD_VEHICLE":
-                return vehicleService.addVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]), arguments[3], Double.parseDouble(arguments[4]));
+                return vehicleService.addVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
+                    arguments[3], Double.parseDouble(arguments[4]));
+            case "BOOK":
+                return branchService.bookVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
+                    Integer.parseInt(arguments[3]), Integer.parseInt(arguments[4]));
             default:
                 return "Command Unknown";
         }

@@ -8,14 +8,14 @@ import java.util.Map;
 public class BranchRepository {
     private static final Map<String, Branch> branchMap = new HashMap<>();
 
-    public static boolean saveBranch(Branch branch){
+    public boolean saveBranch(Branch branch){
         if(branchMap.containsKey(branch.getName()))
             return false;
         branchMap.put(branch.getName(), branch);
         return true;
     }
 
-    public static Branch getBranchByName(String branchName){
+    public Branch getBranchByName(String branchName){
         return branchMap.get(branchName);
     }
 }

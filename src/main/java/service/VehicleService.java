@@ -14,9 +14,11 @@ import java.util.List;
 public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
+    private final BranchRepository branchRepository;
 
     public VehicleService() {
         vehicleRepository = new VehicleRepository();
+        branchRepository = new BranchRepository();
     }
 
     public Boolean addVehicle(String branchName, VehicleType vehicleType, String vehicleId, double price) {
@@ -28,11 +30,19 @@ public class VehicleService {
                 .bookingSchedule(new LinkedList<>())
                 .build();
 
-        Branch branch = BranchRepository.getBranchByName(branchName);
+        Branch branch = branchRepository.getBranchByName(branchName);
 
         if(!branch.getVehicleCatalog().containsKey(vehicleType))
             return false;
 
-        return VehicleRepository.saveVehicle(vehicle);
+        return vehicleRepository.saveVehicle(vehicle);
+    }
+
+    public static Boolean isVehicleAvailable(Vehicle vehicle) {
+        return true;
+    }
+
+    public static Double bookVehicle(Vehicle vehicle, int startTime, int endTime) {
+        return vehicle.getBookingPrice();
     }
 }

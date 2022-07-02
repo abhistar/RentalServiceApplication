@@ -5,10 +5,7 @@ import model.Vehicle;
 import model.VehicleType;
 import repository.BranchRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BranchService {
     private final BranchRepository branchRepository;
@@ -18,10 +15,10 @@ public class BranchService {
     }
 
     public Boolean addBranch(String branchName, List<VehicleType> vehicleTypeList) {
-        HashMap<VehicleType, List<Vehicle>> vehicleCatalog = new HashMap<>();
+        HashMap<VehicleType, PriorityQueue<Vehicle>> vehicleCatalog = new HashMap<>();
 
         vehicleTypeList.forEach(vehicleType -> {
-            vehicleCatalog.put(vehicleType, new ArrayList<>());
+            vehicleCatalog.put(vehicleType, new PriorityQueue<>());
         });
 
         Branch branch = Branch.builder()
@@ -29,7 +26,19 @@ public class BranchService {
                 .vehicleCatalog(vehicleCatalog)
                 .build();
 
-        return BranchRepository.saveBranch(branch);
+        return branchRepository.saveBranch(branch);
+    }
+
+    public Double bookVehicle(String branchName, VehicleType vehicleType, int startTime, int endTime) {
+        Branch branch = branchRepository.getBranchByName(branchName);
+
+        for (Vehicle vehicle : branch.getVehicleCatalog().get(vehicleType)) {
+            if (VehicleService.isVehicleAvailable(vehicle)) {
+                return VehicleService.bookVehicle(vehicle, startTime, endTime);
+            }
+        }
+
+        return -1.0;
     }
 
     //TODO: delete branch functionality
