@@ -1,5 +1,5 @@
-import model.Vehicle;
 import model.VehicleType;
+import service.BookingService;
 import service.BranchService;
 import service.VehicleService;
 
@@ -9,10 +9,12 @@ import java.util.List;
 public class RentalServiceExecutor {
     private final VehicleService vehicleService;
     private final BranchService branchService;
+    private final BookingService bookingService;
 
     public RentalServiceExecutor() {
         vehicleService = new VehicleService();
         branchService = new BranchService();
+        bookingService = new BookingService();
     }
 
     public Object execute(String command) {
@@ -27,7 +29,7 @@ public class RentalServiceExecutor {
                 return vehicleService.addVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
                     arguments[3], Double.parseDouble(arguments[4]));
             case "BOOK":
-                return branchService.bookVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
+                return bookingService.bookVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
                     Integer.parseInt(arguments[3]), Integer.parseInt(arguments[4]));
             default:
                 return "Command Unknown";
