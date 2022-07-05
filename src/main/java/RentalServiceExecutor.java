@@ -42,11 +42,7 @@ public class RentalServiceExecutor {
         List<VehicleType> vehicles = new ArrayList<>();
 
         for(String vehicle: vehicleList) {
-            for (VehicleType vehicleType: VehicleType.values()) {
-                if(vehicleType.name().equalsIgnoreCase(vehicle)) {
-                    vehicles.add(vehicleType);
-                }
-            }
+            vehicles.add(VehicleType.getVehicleType(vehicle));
         }
         return vehicles;
     }
