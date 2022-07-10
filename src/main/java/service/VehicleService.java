@@ -36,6 +36,7 @@ public class VehicleService {
     }
 
     //TODO Add logic to this function and write test cases
+
     public static Boolean isVehicleAvailable(Vehicle vehicle, int startTime, int endTime) {
         return true;
     }
