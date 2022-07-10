@@ -15,7 +15,7 @@ public class BranchRepository {
         return true;
     }
 
-    public static Branch getBranchByName(String branchName){
+    public Branch getBranchByName(String branchName){
         return branchMap.get(branchName);
     }
 }

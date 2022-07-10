@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RentalServiceExecutor {
+
     private final VehicleService vehicleService;
     private final BranchService branchService;
     private final BookingService bookingService;

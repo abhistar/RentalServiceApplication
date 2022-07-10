@@ -22,6 +22,8 @@ public class BranchService {
             vehicleCatalog.put(vehicleType, new PriorityQueue<>(5, new VehicleByPriceComparator()));
         });
 
+        if (vehicleCatalog.isEmpty()) return false;
+
         Branch branch = Branch.builder()
                 .name(branchName)
                 .vehicleCatalog(vehicleCatalog)
@@ -31,7 +33,7 @@ public class BranchService {
     }
 
     public String displayVehicle(String branchName, int startTime, int endTime) {
-        Branch branch = BranchRepository.getBranchByName(branchName);
+        Branch branch = branchRepository.getBranchByName(branchName);
         List<String> availableVehicles = new ArrayList<>();
 
         for (VehicleType vehicleType: branch.getVehicleCatalog().keySet()) {
