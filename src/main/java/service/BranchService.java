@@ -1,5 +1,6 @@
 package service;
 
+import comparator.VehicleByPriceComparator;
 import model.Branch;
 import model.Vehicle;
 import model.VehicleType;
@@ -18,7 +19,7 @@ public class BranchService {
         HashMap<VehicleType, PriorityQueue<Vehicle>> vehicleCatalog = new HashMap<>();
 
         vehicleTypeList.forEach(vehicleType -> {
-            vehicleCatalog.put(vehicleType, new PriorityQueue<>());
+            vehicleCatalog.put(vehicleType, new PriorityQueue<>(5, new VehicleByPriceComparator()));
         });
 
         Branch branch = Branch.builder()
