@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class Vehicle {
-    private int id;         // unique identifier of vehicle
+    private String id;         // unique identifier of vehicle
     private VehicleType type;    // type of vehicle like car, bike, auto etc.
     private double bookingPrice; //fixed rent of vehicle
     private List<TimeSlot> bookingSchedule;

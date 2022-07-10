@@ -19,7 +19,7 @@ public class VehicleService {
         vehicleRepository = new VehicleRepository();
     }
 
-    public boolean addVehicle(String branchName, VehicleType vehicleType, int vehicleId, double price) {
+    public Boolean addVehicle(String branchName, VehicleType vehicleType, String vehicleId, double price) {
         Vehicle vehicle = Vehicle.builder()
                 .id(vehicleId)
                 .type(vehicleType)
@@ -33,6 +33,16 @@ public class VehicleService {
         if(!branch.getVehicleCatalog().containsKey(vehicleType))
             return false;
 
-        return VehicleRepository.saveVehicle(vehicle);
+        return vehicleRepository.saveVehicle(vehicle);
+    }
+
+    //TODO Add logic to this function
+    public static Boolean isVehicleAvailable(Vehicle vehicle) {
+        return true;
+    }
+
+    //TODO Add logic to this function
+    public static Double bookVehicle(Vehicle vehicle, int startTime, int endTime) {
+        return vehicle.getBookingPrice();
     }
 }
