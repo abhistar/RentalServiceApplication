@@ -17,9 +17,9 @@ public enum VehicleType {
         return this.capacity;
     }
 
-    public static VehicleType getVehicleType(String vehicle) {
+    public static VehicleType getVehicleType(String vehicleTypeString) {
         for(VehicleType vehicleType: VehicleType.values()) {
-            if(vehicleType.name().equalsIgnoreCase(vehicle)) {
+            if(vehicleType.name().equalsIgnoreCase(vehicleTypeString)) {
                 return vehicleType;
             }
         }

@@ -14,13 +14,14 @@ public class RentalServiceApplication {
         while(true) {
             String input = scanner.nextLine();
             System.out.println("Entered input: " + input);
-
-            if(input.equalsIgnoreCase("exit")) {
-                scanner.close();
-                System.out.println("Thank you for using the application, Good Bye!");
+     
+            if(input.equalsIgnoreCase("exit")) {                              
                 break;
             }
+
             System.out.println(serviceExecutor.execute(input));
         }
+        scanner.close();
+        System.out.println("Thank you for using the application, Good Bye!");
     }
 }
