@@ -101,52 +101,6 @@ class BranchServiceTest {
     }
 
     @Nested
-    class BookVehicleMethod {
-        @Test
-        void shouldReturnNegative1_WhenBranchHasNoCarAvailable() {
-            PriorityQueue<Vehicle> queue = new PriorityQueue<>(5, new VehicleByPriceComparator());
-            queue.add(Mockito.mock(Vehicle.class));
-            Branch branch = Branch.builder()
-                .name("B1")
-                .vehicleCatalog(new HashMap<>(Map.of(CAR, queue)))
-                .build();
-
-            when(branchRepository.getBranchByName(any())).thenReturn(branch);
-
-            try (MockedStatic<VehicleService> mockedStatic = mockStatic(VehicleService.class)) {
-                mockedStatic.when(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt())).thenReturn(false);
-
-                assertEquals(-1, branchService.bookVehicle(branch.getName(), CAR, 1, 5));
-
-                mockedStatic.verify(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt()), times(1));
-                mockedStatic.verify(() -> VehicleService.bookVehicle(any(), anyInt(), anyInt()), times(0));
-            }
-        }
-
-        @Test
-        void shouldExecuteBookVehicle1_timeWhenBranchHas2CarsAvailable() {
-            PriorityQueue<Vehicle> queue = new PriorityQueue<>(5, new VehicleByPriceComparator());
-            queue.add(Mockito.mock(Vehicle.class));
-            queue.add(Mockito.mock(Vehicle.class));
-            Branch branch = Branch.builder()
-                .name("B1")
-                .vehicleCatalog(new HashMap<>(Map.of(CAR, queue)))
-                .build();
-
-            when(branchRepository.getBranchByName(any())).thenReturn(branch);
-
-            try (MockedStatic<VehicleService> mockedStatic = mockStatic(VehicleService.class)) {
-                mockedStatic.when(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt())).thenReturn(true);
-
-                assertEquals(0.0, branchService.bookVehicle(branch.getName(), CAR, 1, 5));
-
-                mockedStatic.verify(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt()), times(1));
-                mockedStatic.verify(() -> VehicleService.bookVehicle(any(), anyInt(), anyInt()), times(1));
-            }
-        }
-    }
-
-    @Nested
     class DisplayVehicleMethod {
         @Test
         void shouldReturnV1_AsStringOutputWhenHasOneVehicleAvailable() {

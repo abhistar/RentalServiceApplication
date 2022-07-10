@@ -11,13 +11,9 @@ public class RentalServiceApplication {
         Scanner scanner = new Scanner(new File(filePath));
         RentalServiceExecutor serviceExecutor = new RentalServiceExecutor();
 
-        while(true) {
+        while(scanner.hasNext()) {
             String input = scanner.nextLine();
             System.out.println("Entered input: " + input);
-     
-            if(input.equalsIgnoreCase("exit")) {                              
-                break;
-            }
 
             System.out.println(serviceExecutor.execute(input));
         }
