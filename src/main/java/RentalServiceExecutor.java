@@ -1,3 +1,4 @@
+import model.Vehicle;
 import model.VehicleType;
 import service.BookingService;
 import service.BranchService;
@@ -31,6 +32,8 @@ public class RentalServiceExecutor {
             case "BOOK":
                 return bookingService.bookVehicle(arguments[1], VehicleType.getVehicleType(arguments[2]),
                     Integer.parseInt(arguments[3]), Integer.parseInt(arguments[4]));
+            case "DISPLAY_VEHICLES":
+                return branchService.displayVehicle(arguments[1], Integer.parseInt(arguments[3]), Integer.parseInt(arguments[4]));
             default:
                 return "Command Unknown";
         }

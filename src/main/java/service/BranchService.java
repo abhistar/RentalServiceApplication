@@ -29,5 +29,19 @@ public class BranchService {
         return branchRepository.saveBranch(branch);
     }
 
+    public String displayVehicle(String branchName, int startTime, int endTime) {
+        Branch branch = BranchRepository.getBranchByName(branchName);
+        List<String> availableVehicles = new ArrayList<>();
+
+        for (VehicleType vehicleType: branch.getVehicleCatalog().keySet()) {
+            for (Vehicle vehicle: branch.getVehicleCatalog().get(vehicleType)) {
+                if (VehicleService.isVehicleAvailable(vehicle, startTime, endTime)) {
+                    availableVehicles.add(vehicle.getId());
+                }
+            }
+        }
+        return String.join(", ", availableVehicles);
+    }
+
     //TODO: delete branch functionality
 }

@@ -1,15 +1,12 @@
 package service;
 
 import model.Branch;
-import model.TimeSlot;
 import model.Vehicle;
 import model.VehicleType;
 import repository.BranchRepository;
 import repository.VehicleRepository;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class VehicleService {
 
@@ -37,7 +34,7 @@ public class VehicleService {
     }
 
     //TODO Add logic to this function
-    public static Boolean isVehicleAvailable(Vehicle vehicle) {
+    public static Boolean isVehicleAvailable(Vehicle vehicle, int startTime, int endTime) {
         return true;
     }
 

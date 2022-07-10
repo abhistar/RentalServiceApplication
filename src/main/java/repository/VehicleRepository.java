@@ -10,7 +10,7 @@ public class VehicleRepository {
 
     public boolean saveVehicle(Vehicle vehicle){
         if(vehicleMap.containsKey(vehicle.getId())) return false;
-
+        
         vehicleMap.put(vehicle.getId(), vehicle);
         return true;
     }
