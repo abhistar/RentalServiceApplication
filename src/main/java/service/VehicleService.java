@@ -1,12 +1,14 @@
 package service;
 
 import model.Branch;
+import model.TimeSlot;
 import model.Vehicle;
 import model.VehicleType;
 import repository.BranchRepository;
 import repository.VehicleRepository;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class VehicleService {
     private final VehicleRepository vehicleRepository;
@@ -35,13 +37,29 @@ public class VehicleService {
         return vehicleRepository.saveVehicle(vehicle);
     }
 
-    //TODO Add logic to this function and write test cases
     public static Boolean isVehicleAvailable(Vehicle vehicle, int startTime, int endTime) {
-        return true;
+        List<TimeSlot> vehicleBookingSchedules = vehicle.getBookingSchedule();
+        if(vehicleBookingSchedules.size() == 0) {
+            return true;
+        }
+        int slotNumber = getSlotNumberOfNextBookedSlot(vehicleBookingSchedules, startTime);
+
+        return (slotNumber == vehicleBookingSchedules.size() && startTime >= vehicleBookingSchedules.get(slotNumber-1).getEndTime())
+            || (slotNumber <vehicleBookingSchedules.size() && endTime <= vehicleBookingSchedules.get(slotNumber).getStartTime());
     }
 
-    //TODO Add logic to this function and write test cases
     public static Double bookVehicle(Vehicle vehicle, int startTime, int endTime) {
-        return vehicle.getBookingPrice();
+        List<TimeSlot> vehicleBookingSchedules = vehicle.getBookingSchedule();
+        int slotNumber = getSlotNumberOfNextBookedSlot(vehicleBookingSchedules, startTime);
+
+        vehicle.getBookingSchedule().add(slotNumber, TimeSlot.builder().startTime(startTime).endTime(endTime).build());
+        return vehicle.getBookingPrice()*(endTime - startTime);
+    }
+
+    private static int getSlotNumberOfNextBookedSlot(List<TimeSlot> vehicleBookingSchedule, int startTime) {
+        for(int slotNumber = 0; slotNumber < vehicleBookingSchedule.size(); slotNumber++) {
+            if(startTime < vehicleBookingSchedule.get(slotNumber).getStartTime()) return slotNumber;
+        }
+        return vehicleBookingSchedule.size();
     }
 }

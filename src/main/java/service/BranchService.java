@@ -32,6 +32,4 @@ public class BranchService {
 
         return branchRepository.saveBranch(branch);
     }
-
-    //TODO: delete branch functionality
 }
