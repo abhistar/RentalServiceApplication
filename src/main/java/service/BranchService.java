@@ -33,28 +33,5 @@ public class BranchService {
         return branchRepository.saveBranch(branch);
     }
 
-    public String displayVehicle(String branchName, int startTime, int endTime) {
-        Branch branch = branchRepository.getBranchByName(branchName);
-        PriorityQueue<Vehicle> availableVehicles = new PriorityQueue<Vehicle>(10, new VehicleByPriceComparator());
-
-        for (VehicleType vehicleType: branch.getVehicleCatalog().keySet()) {
-            for (Vehicle vehicle: branch.getVehicleCatalog().get(vehicleType)) {
-                if (VehicleService.isVehicleAvailable(vehicle, startTime, endTime)) {
-                    availableVehicles.add(vehicle);
-                }
-            }
-        }
-
-        return getVehicleIdStringFromQueue(availableVehicles);
-    }
-
-    private String getVehicleIdStringFromQueue(PriorityQueue<Vehicle> availableVehicles) {
-        String vehiclesList = Objects.requireNonNull(availableVehicles.poll()).getId();
-        while (!availableVehicles.isEmpty()) {
-            vehiclesList = MessageFormat.format("{0}, {1}", vehiclesList, Objects.requireNonNull(availableVehicles.poll()).getId());
-        }
-        return vehiclesList;
-    }
-
     //TODO: delete branch functionality
 }

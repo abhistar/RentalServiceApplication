@@ -99,49 +99,4 @@ class BranchServiceTest {
             verify(branchRepository, times(0)).saveBranch(branchArgumentCaptor.capture());
         }
     }
-
-    @Nested
-    class DisplayVehicleMethod {
-        @Test
-        void shouldReturnV1_AsStringOutputWhenHasOneVehicleAvailable() {
-            PriorityQueue<Vehicle> queue = new PriorityQueue<>(5, new VehicleByPriceComparator());
-            queue.add(Vehicle.builder().id("V1").build());
-            Branch branch = Branch.builder()
-                .name("B1")
-                .vehicleCatalog(new HashMap<>(Map.of(CAR, queue)))
-                .build();
-
-            when(branchRepository.getBranchByName(any())).thenReturn(branch);
-
-            try (MockedStatic<VehicleService> mockedStatic = mockStatic(VehicleService.class)) {
-                mockedStatic.when(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt())).thenReturn(true);
-
-                assertEquals("V1", branchService.displayVehicle(branch.getName(), 1, 5));
-
-                mockedStatic.verify(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt()), times(1));
-            }
-        }
-
-        @Test
-        void shouldReturnV2comma_V1_AsStringOutputWhenHasOneVehicleAvailable() {
-            PriorityQueue<Vehicle> queue = new PriorityQueue<>(5, new VehicleByPriceComparator());
-            queue.add(Vehicle.builder().id("V1").bookingPrice(1000.0).build());
-            queue.add(Vehicle.builder().id("V2").bookingPrice(500.0).build());
-            Branch branch = Branch.builder()
-                .name("B1")
-                .vehicleCatalog(new HashMap<>(Map.of(CAR, queue)))
-                .build();
-
-            when(branchRepository.getBranchByName(any())).thenReturn(branch);
-
-            try (MockedStatic<VehicleService> mockedStatic = mockStatic(VehicleService.class)) {
-                mockedStatic.when(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt())).thenReturn(true);
-
-                assertEquals("V2, V1", branchService.displayVehicle(branch.getName(), 1, 5));
-
-                mockedStatic.verify(() -> VehicleService.isVehicleAvailable(any(), anyInt(), anyInt()), times(2));
-            }
-        }
-
-    }
 }
