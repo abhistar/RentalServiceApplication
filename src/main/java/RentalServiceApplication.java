@@ -1,21 +1,27 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class RentalServiceApplication {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Welcome to Rental Service Application");
 
-        Scanner input = new Scanner(System.in);
+        String filePath = "src/main/resources/input_file.txt";
+
+        Scanner scanner = new Scanner(new File(filePath));
         RentalServiceExecutor serviceExecutor = new RentalServiceExecutor();
 
         while(true) {
-            System.out.println("Enter next command: ");
-            String command = input.nextLine();
-
-            if(command.equalsIgnoreCase("exit")) {
-                System.out.println("Thank you for using the application, Good Bye!");
+            String input = scanner.nextLine();
+            System.out.println("Entered input: " + input);
+     
+            if(input.equalsIgnoreCase("exit")) {                              
                 break;
             }
-            System.out.println(serviceExecutor.execute(command));
+
+            System.out.println(serviceExecutor.execute(input));
         }
+        scanner.close();
+        System.out.println("Thank you for using the application, Good Bye!");
     }
 }

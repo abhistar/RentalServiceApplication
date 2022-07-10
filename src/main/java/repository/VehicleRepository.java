@@ -14,7 +14,7 @@ public class VehicleRepository {
         vehicleMap.put(vehicle.getId(), vehicle);
         return true;
     }
-    
+
     public Vehicle getVehicleById(String vehicleId){
         return vehicleMap.get(vehicleId);
     }
