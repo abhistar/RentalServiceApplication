@@ -30,18 +30,6 @@ public class BranchService {
         return branchRepository.saveBranch(branch);
     }
 
-    public Double bookVehicle(String branchName, VehicleType vehicleType, int startTime, int endTime) {
-        Branch branch = BranchRepository.getBranchByName(branchName);
-
-        for (Vehicle vehicle : branch.getVehicleCatalog().get(vehicleType)) {
-            if (VehicleService.isVehicleAvailable(vehicle, startTime, endTime)) {
-                return VehicleService.bookVehicle(vehicle, startTime, endTime);
-            }
-        }
-
-        return -1.0;
-    }
-
     public String displayVehicle(String branchName, int startTime, int endTime) {
         Branch branch = BranchRepository.getBranchByName(branchName);
         List<String> availableVehicles = new ArrayList<>();
